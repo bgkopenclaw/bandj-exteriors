@@ -1,0 +1,55 @@
+---
+import { site } from '../data/site';
+
+interface Props {
+  heading?: string;
+  subheading?: string;
+}
+const {
+  heading = 'Water, applied with judgment.',
+  subheading = 'Free estimate. Most jobs scheduled within a week.',
+} = Astro.props;
+---
+<!--
+  Quiet closer. NO gradient band, NO card grid.
+  Big statement set as type, three direct lines below as data, primary CTA marine.
+-->
+<section class="border-t border-hairline">
+  <div class="mx-auto max-w-[1440px] px-5 sm:px-8 lg:px-12 py-20 md:py-32">
+    <div class="grid grid-cols-12 gap-y-12 gap-x-6">
+      <div class="col-span-12 md:col-span-8" data-reveal>
+        <p class="label mb-6">— end</p>
+        <h2 class="d-01 text-balance">{heading}</h2>
+        <p class="mt-6 text-bone-soft text-lg max-w-measure">{subheading}</p>
+
+        <div class="mt-10 flex flex-col sm:flex-row gap-4 items-start sm:items-center">
+          <a href="/contact" class="btn">
+            Get a quote
+            <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M7 17 17 7M9 7h8v8"/>
+            </svg>
+          </a>
+          <a href={`tel:${site.contacts[0].tel}`} class="link-arrow text-base">
+            or call {site.contacts[0].name} — {site.contacts[0].phone}
+            <span class="arrow">↗</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- Three contacts as data, hairline-divided -->
+      <aside class="col-span-12 md:col-span-4 md:col-start-9" data-reveal style="--idx:1">
+        <p class="label mb-5">Direct</p>
+        <ul>
+          {site.contacts.map((c, i) => (
+            <li class="flex items-baseline justify-between gap-4 py-3 border-t border-hairline">
+              <span class="text-bone-soft">
+                <span class="font-mono text-bone-mute mr-2 text-sm">0{i + 1}</span>{c.name}
+              </span>
+              <a href={`tel:${c.tel}`} class="phone text-base">{c.phone}</a>
+            </li>
+          ))}
+        </ul>
+      </aside>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,45 @@
+---
+import { calendlyUrl } from '../data/site';
+
+interface Props {
+  heading?: string;
+  intro?: string;
+}
+
+const {
+  heading = 'Book an on-site estimate.',
+  intro = 'Pick a window. We come out, walk the property, and leave you with a written quote.',
+} = Astro.props;
+---
+<!--
+  Calendly inline embed.
+  URL pulled from src/data/site.ts (calendlyUrl) so it stays a one-edit change.
+  `is:inline` keeps Astro from bundling the third-party script.
+-->
+<section class="border-t border-hairline">
+  <div class="mx-auto max-w-[1440px] px-5 sm:px-8 lg:px-12 py-16 md:py-24">
+    <div class="grid grid-cols-12 gap-y-8 gap-x-6 mb-10 md:mb-14">
+      <div class="col-span-12 md:col-span-5" data-reveal>
+        <p class="label mb-4">N° 02 — direct booking</p>
+        <h2 class="d-02">{heading}</h2>
+      </div>
+      <div class="col-span-12 md:col-span-6 md:col-start-7 md:pt-6" data-reveal style="--idx:1">
+        <p class="text-bone-soft text-lg max-w-measure">{intro}</p>
+      </div>
+    </div>
+
+    <div
+      class="calendly-inline-widget bg-bone"
+      data-url={calendlyUrl}
+      style="min-width:320px;height:720px;transition-delay:120ms"
+      data-reveal
+    ></div>
+    <script
+      src="https://assets.calendly.com/assets/external/widget.js"
+      async
+      is:inline
+    ></script>
+
+    <p class="label mt-5">Confirmation lands on our Google Calendar automatically.</p>
+  </div>
+</section>

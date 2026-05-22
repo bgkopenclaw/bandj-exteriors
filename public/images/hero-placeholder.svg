@@ -1,0 +1,55 @@
+<!-- PLACEHOLDER HERO — art-directed slate-and-spray atmosphere. Replace with a real wet-siding action shot when available (suggested: 16:10, ~2400px wide, moody natural light, water visible mid-spray). -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 1200" preserveAspectRatio="xMidYMid slice" role="img" aria-label="Atmospheric placeholder: wet slate with spray light">
+  <defs>
+    <radialGradient id="lamp" cx="0.30" cy="0.42" r="0.55">
+      <stop offset="0%"  stop-color="#5B9CBF" stop-opacity="0.55"/>
+      <stop offset="40%" stop-color="#1F6A9B" stop-opacity="0.20"/>
+      <stop offset="100%" stop-color="#1B2125" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="floor" x1="0" y1="0.6" x2="0" y2="1">
+      <stop offset="0%"  stop-color="#1B2125" stop-opacity="0"/>
+      <stop offset="100%" stop-color="#0F1316" stop-opacity="0.85"/>
+    </linearGradient>
+    <filter id="noise">
+      <feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="2" stitchTiles="stitch"/>
+      <feColorMatrix values="0 0 0 0 0.96  0 0 0 0 0.94  0 0 0 0 0.89  0 0 0 0.10 0"/>
+    </filter>
+    <pattern id="strakes" x="0" y="0" width="1600" height="36" patternUnits="userSpaceOnUse">
+      <rect x="0" y="0" width="1600" height="36" fill="#252B30"/>
+      <rect x="0" y="34" width="1600" height="2" fill="#3D4348" opacity="0.55"/>
+    </pattern>
+  </defs>
+
+  <!-- base slate -->
+  <rect width="1600" height="1200" fill="#1B2125"/>
+
+  <!-- subtle siding texture across most of the frame -->
+  <rect x="0" y="220" width="1600" height="980" fill="url(#strakes)" opacity="0.85"/>
+
+  <!-- atmospheric spray light, off-center to bias the eye left -->
+  <rect width="1600" height="1200" fill="url(#lamp)"/>
+
+  <!-- droplets — tiny, scattered, varied -->
+  <g fill="#DDD7CA" opacity="0.62">
+    <circle cx="320"  cy="640" r="2.5"/>
+    <circle cx="380"  cy="710" r="1.8"/>
+    <circle cx="455"  cy="590" r="2.2"/>
+    <circle cx="510"  cy="780" r="1.5"/>
+    <circle cx="270"  cy="820" r="1.8"/>
+    <circle cx="600"  cy="660" r="1.4"/>
+    <circle cx="640"  cy="770" r="1.0"/>
+    <circle cx="710"  cy="540" r="1.6"/>
+    <circle cx="180"  cy="700" r="1.2"/>
+  </g>
+
+  <!-- diagonal spray cone, suggestive not literal -->
+  <g opacity="0.16">
+    <path d="M 60 1080 Q 360 720 720 660 Q 480 800 60 1140 Z" fill="#5B9CBF"/>
+  </g>
+
+  <!-- floor gradient to ground the bottom -->
+  <rect width="1600" height="1200" fill="url(#floor)"/>
+
+  <!-- grain -->
+  <rect width="1600" height="1200" filter="url(#noise)" opacity="0.55"/>
+</svg>

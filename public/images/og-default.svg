@@ -1,0 +1,43 @@
+<!-- Default Open Graph card. 1200×630, brand-matched. Per-page overrides via BaseLayout's ogImage prop. -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" role="img" aria-label="B&amp;J Exteriors — Power washing in Bergen County, NJ">
+  <defs>
+    <radialGradient id="ogLamp" cx="0.18" cy="0.45" r="0.55">
+      <stop offset="0%"  stop-color="#5B9CBF" stop-opacity="0.45"/>
+      <stop offset="60%" stop-color="#1F6A9B" stop-opacity="0.12"/>
+      <stop offset="100%" stop-color="#1B2125" stop-opacity="0"/>
+    </radialGradient>
+    <pattern id="ogStrakes" x="0" y="0" width="1200" height="32" patternUnits="userSpaceOnUse">
+      <rect width="1200" height="32" fill="#252B30"/>
+      <rect y="30" width="1200" height="2" fill="#3D4348" opacity="0.5"/>
+    </pattern>
+  </defs>
+
+  <rect width="1200" height="630" fill="#1B2125"/>
+  <rect x="0" y="180" width="1200" height="450" fill="url(#ogStrakes)" opacity="0.8"/>
+  <rect width="1200" height="630" fill="url(#ogLamp)"/>
+
+  <!-- Top mono row -->
+  <text x="64" y="80" fill="#9C968A" font-family="ui-monospace, monospace" font-size="20" letter-spacing="2">N° 00 — INDEX</text>
+  <text x="1136" y="80" fill="#9C968A" font-family="ui-monospace, monospace" font-size="20" letter-spacing="2" text-anchor="end">BERGEN CO · NJ · EST 2021</text>
+
+  <!-- Headline -->
+  <text x="64" y="280" fill="#F5EFE3" font-family="'Familjen Grotesk', system-ui, sans-serif" font-weight="700" font-size="92" letter-spacing="-3">
+    Strip off everything
+  </text>
+  <text x="64" y="380" fill="#F5EFE3" font-family="'Familjen Grotesk', system-ui, sans-serif" font-weight="700" font-size="92" letter-spacing="-3">
+    the weather put there.
+  </text>
+
+  <!-- Sub -->
+  <text x="64" y="460" fill="#DDD7CA" font-family="'Familjen Grotesk', system-ui, sans-serif" font-size="26">
+    B&amp;J Exteriors — power washing, Bergen County, NJ
+  </text>
+
+  <!-- Bottom mono row -->
+  <line x1="64" y1="540" x2="1136" y2="540" stroke="#3D4348"/>
+  <text x="64" y="580" fill="#F5EFE3" font-family="'Familjen Grotesk', system-ui, sans-serif" font-weight="600" font-size="24">B&amp;J</text>
+  <text x="116" y="580" fill="#9C968A" font-family="ui-monospace, monospace" font-size="18" letter-spacing="2">EXTERIORS</text>
+  <text x="1136" y="580" fill="#F5EFE3" font-family="ui-monospace, monospace" font-size="22" letter-spacing="1" text-anchor="end">
+    201·468·7580
+  </text>
+</svg>

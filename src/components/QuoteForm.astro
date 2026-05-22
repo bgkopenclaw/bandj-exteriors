@@ -1,0 +1,77 @@
+---
+import { site } from '../data/site';
+---
+<!--
+  Form submission: Netlify Forms by default.
+  Inputs sit on hairline underlines, not boxed cards. Labels above as mono small caps.
+
+  Formspree swap: change form tag to
+    <form action="https://formspree.io/f/YOUR_ID" method="POST">
+  and remove data-netlify, netlify-honeypot, and the hidden form-name input.
+-->
+<form
+  name="quote-request"
+  method="POST"
+  data-netlify="true"
+  netlify-honeypot="bot-field"
+  class="space-y-7"
+>
+  <input type="hidden" name="form-name" value="quote-request" />
+  <p class="hidden">
+    <label>Don’t fill this out if you’re human: <input name="bot-field" /></label>
+  </p>
+
+  <div class="grid sm:grid-cols-2 gap-7">
+    <div>
+      <label for="name" class="label block mb-2">01 / Name</label>
+      <input id="name" name="name" type="text" required autocomplete="name"
+        class="w-full bg-transparent text-bone py-2 border-b border-hairline focus:border-bone focus:outline-none transition-colors placeholder-bone-mute" />
+    </div>
+    <div>
+      <label for="phone" class="label block mb-2">02 / Phone</label>
+      <input id="phone" name="phone" type="tel" required autocomplete="tel" inputmode="tel"
+        class="w-full bg-transparent text-bone py-2 border-b border-hairline focus:border-bone focus:outline-none transition-colors placeholder-bone-mute" />
+    </div>
+  </div>
+
+  <div class="grid sm:grid-cols-2 gap-7">
+    <div>
+      <label for="email" class="label block mb-2">03 / Email</label>
+      <input id="email" name="email" type="email" autocomplete="email"
+        class="w-full bg-transparent text-bone py-2 border-b border-hairline focus:border-bone focus:outline-none transition-colors placeholder-bone-mute" />
+    </div>
+    <div>
+      <label for="town" class="label block mb-2">04 / Town</label>
+      <input id="town" name="town" type="text" required autocomplete="address-level2" placeholder="Hillsdale, NJ"
+        class="w-full bg-transparent text-bone py-2 border-b border-hairline focus:border-bone focus:outline-none transition-colors placeholder-bone-mute" />
+    </div>
+  </div>
+
+  <div>
+    <label for="service" class="label block mb-2">05 / What needs washing</label>
+    <select id="service" name="service" required
+      class="w-full bg-transparent text-bone py-2 border-b border-hairline focus:border-bone focus:outline-none transition-colors appearance-none">
+      <option value="" class="bg-bg">Pick one</option>
+      {site.services.map((s) => (
+        <option value={s.title} class="bg-bg">{s.title}</option>
+      ))}
+      <option value="Multiple / Not sure" class="bg-bg">Multiple or not sure</option>
+    </select>
+  </div>
+
+  <div>
+    <label for="message" class="label block mb-2">06 / Tell us about it</label>
+    <textarea id="message" name="message" rows="4" placeholder="A sentence or two about the property"
+      class="w-full bg-transparent text-bone py-2 border-b border-hairline focus:border-bone focus:outline-none transition-colors placeholder-bone-mute resize-none"></textarea>
+  </div>
+
+  <div class="pt-4">
+    <button type="submit" class="btn">
+      Send request
+      <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <path d="M7 17 17 7M9 7h8v8"/>
+      </svg>
+    </button>
+    <p class="label mt-4">Response within one business day. Phone is faster.</p>
+  </div>
+</form>

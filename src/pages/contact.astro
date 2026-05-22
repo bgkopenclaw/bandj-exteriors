@@ -1,0 +1,101 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import QuoteForm from '../components/QuoteForm.astro';
+import BookingCalendar from '../components/BookingCalendar.astro';
+import { site } from '../data/site';
+
+const description =
+  'Get a free power washing quote in Bergen County, NJ. Call Ben at 201-468-7580, Justin at 201-665-6945, or Brady at 201-625-3996 — or send a quick request online.';
+---
+<BaseLayout
+  title="Quote — B&J Exteriors"
+  description={description}
+  path="/contact"
+>
+  <!-- PAGE HEAD -->
+  <section class="border-b border-hairline">
+    <div class="mx-auto max-w-[1440px] px-5 sm:px-8 lg:px-12 pt-20 md:pt-28 pb-16 md:pb-24">
+      <div class="grid grid-cols-12 gap-y-8 gap-x-6">
+        <div class="col-span-12 md:col-span-2">
+          <p class="label">Index / 05</p>
+        </div>
+        <div class="col-span-12 md:col-span-9 md:col-start-3" data-reveal>
+          <h1 class="d-01 max-w-[18ch]">Three ways to reach us.</h1>
+          <p class="mt-8 text-bone-soft text-lg md:text-xl max-w-measure">
+            Pick the one that fits how you work. Phone is fastest. Calendar is most precise. Form is for when you'd rather type than talk.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- THREE CONTACTS — big mono numbers, hairline rows -->
+  <section class="border-b border-hairline">
+    <div class="mx-auto max-w-[1440px] px-5 sm:px-8 lg:px-12 py-16 md:py-24">
+      <div class="grid grid-cols-12 gap-x-6 gap-y-10 mb-10 md:mb-14">
+        <div class="col-span-12 md:col-span-4" data-reveal>
+          <p class="label mb-4">N° 01 — direct</p>
+          <h2 class="d-02">Call.</h2>
+        </div>
+        <div class="col-span-12 md:col-span-7 md:col-start-6 md:pt-2" data-reveal style="--idx:1">
+          <p class="text-bone-soft text-lg max-w-measure">
+            These are cell phones, not a queue. Tap any one to call. If we can't pick up, leave a message — we call back the same day.
+          </p>
+        </div>
+      </div>
+
+      <ul class="border-t border-hairline" data-reveal>
+        {site.contacts.map((c, i) => (
+          <li>
+            <a
+              href={`tel:${c.tel}`}
+              class="group grid grid-cols-12 gap-x-6 py-6 md:py-8 border-b border-hairline hover:!border-wet transition-colors"
+              aria-label={`Call ${c.name} at ${c.phone}`}
+            >
+              <span class="col-span-2 md:col-span-1 label !text-[0.7rem] self-center">0{i + 1}</span>
+              <span class="col-span-5 md:col-span-4 text-bone text-xl md:text-3xl self-center">{c.name}</span>
+              <span class="col-span-5 md:col-span-7 self-center text-right md:text-left phone text-xl md:text-3xl">
+                {c.phone}
+                <span class="inline-block ml-2 transition-transform group-hover:translate-x-[3px] group-hover:-translate-y-[3px]">↗</span>
+              </span>
+            </a>
+          </li>
+        ))}
+      </ul>
+
+      <p class="label mt-6">Hours: Mon–Fri 7 AM – 7 PM · Sat 8 AM – 5 PM · Sun by appointment</p>
+    </div>
+  </section>
+
+  <!-- CALENDLY — borderless integration; the widget itself becomes the section's visual weight -->
+  <BookingCalendar
+    heading="Book an on-site estimate."
+    subheading="Pick a window. We come out, walk the property, and leave you with a written quote."
+  />
+
+  <!-- FORM — quietest of the three, but the most expressive -->
+  <section class="border-t border-hairline">
+    <div class="mx-auto max-w-[1440px] px-5 sm:px-8 lg:px-12 py-20 md:py-28">
+      <div class="grid grid-cols-12 gap-x-6 gap-y-10">
+        <div class="col-span-12 md:col-span-4" data-reveal>
+          <p class="label mb-4">N° 03 — message</p>
+          <h2 class="d-02">Type it out instead.</h2>
+          <p class="mt-6 text-bone-soft text-base md:text-lg max-w-measure">
+            For when you'd rather not call. Send details and we'll reach back — usually same day, never more than one business day.
+          </p>
+
+          <div class="mt-12 border-t border-hairline pt-6">
+            <p class="label mb-4">Service area</p>
+            <p class="text-bone-soft text-sm leading-relaxed max-w-measure">
+              {site.serviceAreaLong}
+            </p>
+          </div>
+        </div>
+
+        <div class="col-span-12 md:col-span-7 md:col-start-6" data-reveal style="--idx:1">
+          <QuoteForm />
+        </div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

@@ -1,0 +1,100 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import BeforeAfter from '../components/BeforeAfter.astro';
+import CTABand from '../components/CTABand.astro';
+
+// Local generated images — Astro's build pipeline serves AVIF/WebP + srcset.
+import deckRivervaleBefore     from '../assets/before-after/deck-rivervale-before.png';
+import deckRivervaleAfter      from '../assets/before-after/deck-rivervale-after.png';
+import patioEmersonBefore      from '../assets/before-after/patio-emerson-before.png';
+import patioEmersonAfter       from '../assets/before-after/patio-emerson-after.png';
+import patioParkRidgeBefore    from '../assets/before-after/patio-park-ridge-before.png';
+import patioParkRidgeAfter     from '../assets/before-after/patio-park-ridge-after.png';
+import drivewayHillsdaleBefore from '../assets/before-after/driveway-hillsdale-before.png';
+import drivewayHillsdaleAfter  from '../assets/before-after/driveway-hillsdale-after.png';
+import poolWoodcliffBefore     from '../assets/before-after/pool-woodcliff-before.png';
+import poolWoodcliffAfter      from '../assets/before-after/pool-woodcliff-after.png';
+
+const description =
+  'Before and after photographs of recent power washing jobs in Bergen County, NJ — decks, patios, driveways, and pool surrounds by B&J Exteriors.';
+
+// PLACEHOLDER gallery — swap src paths once real photos arrive.
+// Each "set" is a single category broken into pairs.
+const sets = [
+  {
+    num: '01',
+    title: 'Decks, patios & driveways',
+    note: 'Concrete, pavers, wood. Pressure tuned to the surface.',
+    pairs: [
+      { label: 'Cedar deck restoration — Rivervale, NJ', before: deckRivervaleBefore,     after: deckRivervaleAfter },
+      { label: 'Paver patio — Emerson, NJ',              before: patioEmersonBefore,      after: patioEmersonAfter },
+      { label: 'Outdoor patio — Park Ridge, NJ',         before: patioParkRidgeBefore,    after: patioParkRidgeAfter },
+      { label: 'Concrete driveway — Hillsdale, NJ',      before: drivewayHillsdaleBefore, after: drivewayHillsdaleAfter },
+      { label: 'Pool surround — Woodcliff Lake, NJ',     before: poolWoodcliffBefore,     after: poolWoodcliffAfter },
+    ],
+  },
+];
+---
+<BaseLayout
+  title="Sets — B&J Exteriors"
+  description={description}
+  path="/gallery"
+>
+  <!-- PAGE HEAD -->
+  <section class="border-b border-hairline">
+    <div class="mx-auto max-w-[1440px] px-5 sm:px-8 lg:px-12 pt-20 md:pt-28 pb-16 md:pb-24">
+      <div class="grid grid-cols-12 gap-y-8 gap-x-6">
+        <div class="col-span-12 md:col-span-2">
+          <p class="label">Index / 04</p>
+        </div>
+        <div class="col-span-12 md:col-span-9 md:col-start-3" data-reveal>
+          <h1 class="d-01 max-w-[18ch]">Before and after.</h1>
+          <p class="mt-8 text-bone-soft text-lg md:text-xl max-w-measure">
+            Five recent jobs from this season. Frames pulled straight from the camera roll, not retouched. The water did the work.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  {sets.map((set, setIdx) => (
+    <section class="border-b border-hairline">
+      <div class="mx-auto max-w-[1440px] px-5 sm:px-8 lg:px-12 py-16 md:py-24">
+
+        <!-- Section header -->
+        <div class="grid grid-cols-12 gap-y-6 gap-x-6 mb-10 md:mb-14">
+          <div class="col-span-12 md:col-span-5" data-reveal>
+            <p class="label mb-4">Set / {set.num}</p>
+            <h2 class="d-02">{set.title}</h2>
+          </div>
+          <div class="col-span-12 md:col-span-6 md:col-start-7 md:pt-2 flex flex-col md:items-end" data-reveal style="--idx:1">
+            <p class="text-bone-soft text-base md:text-lg md:text-right max-w-measure">{set.note}</p>
+            <a href="/contact" class="link-arrow text-base mt-5 inline-flex">
+              Quote this work
+              <span class="arrow">↗</span>
+            </a>
+          </div>
+        </div>
+
+        <!-- Pair grid: 1 col mobile, 2 cols desktop. Sharp hairline gaps, no rounded corners. -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-px bg-hairline">
+          {set.pairs.map((p, i) => (
+            <div class="bg-bg p-px">
+              <BeforeAfter
+                beforeSrc={p.before}
+                afterSrc={p.after}
+                label={p.label}
+                index={`${String(setIdx + 1).padStart(2, '0')}.${String(i + 1).padStart(2, '0')}`}
+              />
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  ))}
+
+  <CTABand
+    heading="Want frames like these of your place?"
+    subheading="Send a photo or a sentence. We'll come look and quote it."
+  />
+</BaseLayout>

@@ -1,0 +1,94 @@
+---
+import { Picture } from 'astro:assets';
+import type { ImageMetadata } from 'astro';
+
+interface Props {
+  /**
+   * Before image source.
+   *   - `ImageMetadata` (the result of `import X from '../assets/...png'`)
+   *     → rendered with Astro's `<Picture>`. Astro generates AVIF + WebP +
+   *       a PNG fallback at build time, plus a responsive srcset.
+   *   - `string` (a public/ path, an SVG, or a remote URL like Unsplash)
+   *     → rendered with a plain `<img>`, no optimization. Use this for
+   *       SVG placeholders and already-optimized remote images.
+   */
+  beforeSrc: ImageMetadata | string;
+  afterSrc: ImageMetadata | string;
+  label: string;
+  /** Optional mono-label index like "01" or "03 / 08". */
+  index?: string;
+}
+
+const { beforeSrc, afterSrc, label, index } = Astro.props;
+
+// Sizes the same for both panels — each takes up half the BeforeAfter row.
+// Two panels side-by-side, max-w-7xl container, so ~700px each at desktop.
+const PICTURE_WIDTHS = [400, 640, 880];
+const PICTURE_SIZES = '(min-width: 1024px) 700px, 50vw';
+
+// Type guard
+const isStringSrc = (src: ImageMetadata | string): src is string => typeof src === 'string';
+---
+<!--
+  Before/after pair. Aspect ratio sits on the parent div so the image fills it
+  regardless of whether it's a <Picture> or <img>. Labels overlaid bottom-left.
+-->
+<figure class="group" data-reveal>
+  <div class="grid grid-cols-2 gap-px bg-hairline">
+
+    <!-- BEFORE -->
+    <div class="relative bg-bg-up overflow-hidden aspect-[4/5]">
+      {isStringSrc(beforeSrc) ? (
+        <img
+          src={beforeSrc}
+          alt={`${label} — before`}
+          loading="lazy"
+          decoding="async"
+          class="absolute inset-0 w-full h-full object-cover"
+        />
+      ) : (
+        <Picture
+          src={beforeSrc}
+          alt={`${label} — before`}
+          formats={['avif', 'webp']}
+          widths={PICTURE_WIDTHS}
+          sizes={PICTURE_SIZES}
+          loading="lazy"
+          decoding="async"
+          class="absolute inset-0 w-full h-full object-cover"
+        />
+      )}
+      <span class="absolute bottom-3 left-3 label !text-bone bg-bg/70 px-2 py-1 z-10">Before</span>
+    </div>
+
+    <!-- AFTER -->
+    <div class="relative bg-bg-up overflow-hidden aspect-[4/5]">
+      {isStringSrc(afterSrc) ? (
+        <img
+          src={afterSrc}
+          alt={`${label} — after`}
+          loading="lazy"
+          decoding="async"
+          class="absolute inset-0 w-full h-full object-cover"
+        />
+      ) : (
+        <Picture
+          src={afterSrc}
+          alt={`${label} — after`}
+          formats={['avif', 'webp']}
+          widths={PICTURE_WIDTHS}
+          sizes={PICTURE_SIZES}
+          loading="lazy"
+          decoding="async"
+          class="absolute inset-0 w-full h-full object-cover"
+        />
+      )}
+      <span class="absolute bottom-3 left-3 label !text-bone bg-marine px-2 py-1 z-10">After</span>
+    </div>
+
+  </div>
+  <figcaption class="mt-4 flex items-baseline gap-3">
+    {index && <span class="label">{index}</span>}
+    <span class="text-bone">{label}</span>
+  </figcaption>
+</figure>

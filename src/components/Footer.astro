@@ -1,0 +1,82 @@
+---
+import { site } from '../data/site';
+const year = new Date().getFullYear();
+---
+<footer class="border-t border-hairline mt-24 md:mt-40">
+  <div class="mx-auto max-w-[1440px] px-5 sm:px-8 lg:px-12 py-14 md:py-20">
+
+    <!-- Big wordmark + tagline as the dominant element. No 4-column card grid. -->
+    <div class="grid grid-cols-12 gap-y-12 gap-x-6">
+      <div class="col-span-12 md:col-span-7">
+        <p class="label mb-6">N° / sign-off</p>
+        <p class="d-02 max-w-[14ch]">
+          B&amp;J Exteriors. <span class="text-bone-mute">Bergen County, NJ.</span>
+        </p>
+        <p class="mt-5 text-bone-soft max-w-measure">{site.serviceAreaLong}</p>
+      </div>
+
+      <!-- Contacts stacked tight, mono numbers prominent -->
+      <div class="col-span-6 md:col-span-3 md:col-start-9">
+        <p class="label mb-5">Direct lines</p>
+        <ul class="space-y-3">
+          {site.contacts.map((c) => (
+            <li class="flex items-baseline justify-between gap-4 border-b border-hairline pb-2">
+              <span class="text-bone">{c.name}</span>
+              <a href={`tel:${c.tel}`} class="phone text-sm">{c.phone}</a>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </div>
+
+    <!-- Hairline section -->
+    <div class="rule mt-16 md:mt-20"></div>
+
+    <!-- Lower footer row: nav + sections, mono, asymmetric -->
+    <div class="grid grid-cols-12 gap-y-8 gap-x-6 mt-10">
+      <div class="col-span-12 md:col-span-3">
+        <p class="label mb-3">Index</p>
+        <ul class="space-y-2 text-sm">
+          <li><a href="/">Home</a></li>
+          <li><a href="/services">Services</a></li>
+          <li><a href="/about">About</a></li>
+          <li><a href="/gallery">Sets</a></li>
+          <li><a href="/contact">Quote</a></li>
+        </ul>
+      </div>
+
+      <div class="col-span-12 md:col-span-3">
+        <p class="label mb-3">Work</p>
+        <ul class="space-y-2 text-sm">
+          {site.services.map((s) => (
+            <li><a href={`/services#${s.slug}`}>{s.title}</a></li>
+          ))}
+        </ul>
+      </div>
+
+      <div class="col-span-12 md:col-span-3">
+        <p class="label mb-3">Area</p>
+        <ul class="space-y-1.5 text-sm text-bone-soft columns-2 md:columns-1">
+          {site.towns.slice(0, 8).map((t) => <li>{t}</li>)}
+        </ul>
+      </div>
+
+      <div class="col-span-12 md:col-span-3">
+        <p class="label mb-3">Trades</p>
+        <ul class="space-y-2 text-sm text-bone-soft">
+          <li>Licensed &amp; insured</li>
+          <li>Locally owned</li>
+          <li>Free estimates</li>
+          <li>Same-week scheduling</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="rule mt-12 mb-6"></div>
+
+    <div class="flex flex-col md:flex-row justify-between gap-2 label !text-[0.7rem]">
+      <p>© {year} {site.name}</p>
+      <p>{site.domain}</p>
+    </div>
+  </div>
+</footer>

@@ -1,0 +1,137 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import CTABand from '../components/CTABand.astro';
+import { site } from '../data/site';
+
+const description =
+  'Meet Ben, Justin, and Brady — the three owner-operators behind B&J Exteriors. A trusted, hands-on power washing business serving Bergen County, NJ.';
+---
+<BaseLayout
+  title="About — B&J Exteriors"
+  description={description}
+  path="/about"
+>
+  <!-- PAGE HEAD -->
+  <section class="border-b border-hairline">
+    <div class="mx-auto max-w-[1440px] px-5 sm:px-8 lg:px-12 pt-20 md:pt-28 pb-16 md:pb-24">
+      <div class="grid grid-cols-12 gap-y-8 gap-x-6">
+        <div class="col-span-12 md:col-span-2">
+          <p class="label">Index / 03</p>
+        </div>
+        <div class="col-span-12 md:col-span-9 md:col-start-3" data-reveal>
+          <h1 class="d-01 max-w-[16ch]">
+            Three guys. <span class="text-bone-mute">Bergen County, NJ.</span>
+          </h1>
+          <p class="mt-8 text-bone-soft text-lg md:text-xl max-w-measure">
+            B&amp;J Exteriors is owned and operated by Ben, Justin, and Brady. One of us is on every job. That's it. That's the whole company.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- BIG ART-DIRECTED PORTRAIT (placeholder) -->
+  <section class="border-b border-hairline">
+    <div class="relative bg-bg-up aspect-[16/9] md:aspect-[16/8] overflow-hidden">
+      <!-- Verified Unsplash work-scene placeholder. Alt and caption deliberately do NOT claim the people pictured are Ben, Justin, or Brady — when a real candid wide shot of all three at a job site is available, swap src and restore the team-identifying alt/caption. -->
+      <img src="https://images.unsplash.com/photo-1718152470408-cfeebeb6b9fc?auto=format&fit=crop&w=2400&q=80" alt="Power washing crew at work in Bergen County" loading="eager" class="w-full h-full object-cover" />
+      <div class="absolute bottom-5 left-5 md:bottom-8 md:left-8">
+        <p class="label !text-bone-soft">Frame / 001 — at work</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- THE STORY  |  asymmetric, type-led -->
+  <section class="border-b border-hairline">
+    <div class="mx-auto max-w-[1440px] px-5 sm:px-8 lg:px-12 py-20 md:py-32">
+      <div class="grid grid-cols-12 gap-x-6 gap-y-10">
+        <div class="col-span-12 md:col-span-3" data-reveal>
+          <p class="label mb-4">N° 01 — start</p>
+          <h2 class="d-03">How it started.</h2>
+        </div>
+        <div class="col-span-12 md:col-span-8 md:col-start-5" data-reveal style="--idx:1">
+          <div class="space-y-7 text-bone-soft text-lg max-w-measure">
+            <p>
+              We started B&amp;J the way most good small businesses start: friends, a pressure washer, and a stack of neighbors who needed help. The first season was driveways for people we grew up around.
+            </p>
+            <p>
+              By year two we'd added the hot-water rig and a second truck. By year three we'd added Brady. We grew up around Bergen County and we've seen what happens when you hire the wrong contractor — torn-up decks, dead landscaping, no-shows, surprise charges. We started B&amp;J to do the opposite of all of that.
+            </p>
+            <p class="text-bone text-xl md:text-2xl !leading-snug pt-4">
+              When you hire B&amp;J, you're hiring Ben, Justin, and Brady. Not a crew you've never met. Not a franchise. Three guys whose names are on the truck.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- THE THREE  |  hairline-divided portraits, mono labels -->
+  <section class="border-b border-hairline">
+    <div class="mx-auto max-w-[1440px] px-5 sm:px-8 lg:px-12 py-20 md:py-28">
+      <div class="grid grid-cols-12 gap-y-8 gap-x-6 mb-12 md:mb-20">
+        <div class="col-span-12 md:col-span-3" data-reveal>
+          <p class="label mb-4">N° 02 — owners</p>
+          <h2 class="d-03">The three.</h2>
+        </div>
+        <div class="col-span-12 md:col-span-6 md:col-start-7 md:pt-2" data-reveal style="--idx:1">
+          <p class="text-bone-soft text-lg max-w-measure">
+            Direct lines. Tap to call any of us. Whoever answers handles your job.
+          </p>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-px bg-hairline">
+        {site.contacts.map((c, i) => (
+          <div class="bg-bg p-6 md:p-8 flex flex-col">
+            <div class="aspect-[4/5] bg-bg-up mb-6 overflow-hidden">
+              <!-- PLACEHOLDER — replace with a head-and-shoulders portrait of {c.name}, on a job site if possible -->
+              <img src="/images/hero-placeholder.svg" alt={`Portrait of ${c.name}, owner of B&J Exteriors`} loading="lazy" class="w-full h-full object-cover" />
+            </div>
+            <p class="label mb-3">0{i + 1} — owner</p>
+            <h3 class="d-03">{c.name}</h3>
+            <a href={`tel:${c.tel}`} class="phone text-base mt-3 inline-block">
+              {c.phone}
+              <span class="ml-1">↗</span>
+            </a>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- COMMITMENTS  |  hairline rules, not card grid -->
+  <section class="border-b border-hairline">
+    <div class="mx-auto max-w-[1440px] px-5 sm:px-8 lg:px-12 py-20 md:py-28">
+      <div class="grid grid-cols-12 gap-x-6 gap-y-10">
+        <div class="col-span-12 md:col-span-3" data-reveal>
+          <p class="label mb-4">N° 03 — what we promise</p>
+          <h2 class="d-03">Commitments.</h2>
+        </div>
+        <div class="col-span-12 md:col-span-8 md:col-start-5" data-reveal style="--idx:1">
+          <ul class="border-t border-hairline">
+            {[
+              ['Show up', "On time, when we said. If something changes, we call you — not the other way around."],
+              ['Do the work', "No subcontractors, no trainees. One of the three of us is on every job from estimate to final walk-through."],
+              ['Stand behind it', "If something isn't right, we make it right. That's what locally owned actually means."],
+              ['Stay reachable', "Three direct numbers on the page above. They're our cell phones, not a queue."],
+            ].map(([t, d], i) => (
+              <li class="grid grid-cols-12 gap-x-6 py-6 border-b border-hairline">
+                <span class="col-span-2 md:col-span-1 label">0{i + 1}</span>
+                <div class="col-span-10 md:col-span-11">
+                  <h3 class="text-bone text-lg md:text-xl mb-1.5">{t}</h3>
+                  <p class="text-bone-soft max-w-measure">{d}</p>
+                </div>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <CTABand
+    heading="Let's see your property."
+    subheading="On-site estimates are free and take about ten minutes. No pressure, no obligation."
+  />
+</BaseLayout>

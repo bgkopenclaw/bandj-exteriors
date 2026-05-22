@@ -1,0 +1,72 @@
+---
+import { site } from '../data/site';
+
+const nav = [
+  { href: '/', label: 'Index' },
+  { href: '/services', label: 'Work' },
+  { href: '/about', label: 'About' },
+  { href: '/gallery', label: 'Sets' },
+  { href: '/contact', label: 'Quote' },
+];
+
+const primary = site.contacts[0];
+const currentPath = Astro.url.pathname.replace(/\/$/, '') || '/';
+---
+<header
+  data-header
+  class="sticky top-0 z-40 transition-colors duration-300 ease-out-quart bg-bg/0 data-[scrolled=true]:bg-bg/85 data-[scrolled=true]:backdrop-blur-md data-[scrolled=true]:border-b data-[scrolled=true]:border-hairline"
+>
+  <div class="mx-auto max-w-[1440px] px-5 sm:px-8 lg:px-12">
+    <div class="flex items-center justify-between h-16 md:h-20">
+      <!-- Wordmark. PLACEHOLDER vector — real logo (B&J shield + wand) drops in here. -->
+      <a href="/" class="group inline-flex items-baseline gap-3" aria-label={`${site.shortName} home`}>
+        <span class="font-display font-semibold text-bone text-lg md:text-xl tracking-tighter">B&amp;J</span>
+        <span class="label hidden sm:inline">Exteriors</span>
+      </a>
+
+      <!-- Desktop nav. Mono labels, generous gap, no underlines. -->
+      <nav class="hidden md:flex items-center gap-9" aria-label="Primary">
+        {nav.map((item, i) => (
+          <a
+            href={item.href}
+            class:list={[
+              'label !text-[0.7rem] transition-colors',
+              currentPath === item.href ? '!text-bone' : 'hover:!text-bone',
+            ]}
+            aria-current={currentPath === item.href ? 'page' : undefined}
+          >
+            <span class="text-bone-mute mr-1">0{i + 1}</span>{item.label}
+          </a>
+        ))}
+      </nav>
+
+      <!-- Always-visible Call CTA. Marine fill — the one place we use it in chrome. -->
+      <a
+        href={`tel:${primary.tel}`}
+        class="btn !py-2.5 !px-4 text-sm"
+        aria-label={`Call ${primary.name} at ${primary.phone}`}
+      >
+        <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.37 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.33 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/>
+        </svg>
+        <span class="hidden sm:inline">Call</span><span class="sm:hidden">{primary.phone.slice(-4)}</span>
+      </a>
+    </div>
+
+    <!-- Mobile nav: hairline-divided row of mono labels, scrollable -->
+    <nav class="md:hidden -mx-5 px-5 pb-3 flex items-center gap-6 overflow-x-auto" aria-label="Mobile">
+      {nav.map((item, i) => (
+        <a
+          href={item.href}
+          class:list={[
+            'label !text-[0.7rem] whitespace-nowrap',
+            currentPath === item.href ? '!text-bone' : 'hover:!text-bone',
+          ]}
+          aria-current={currentPath === item.href ? 'page' : undefined}
+        >
+          <span class="text-bone-mute mr-1">0{i + 1}</span>{item.label}
+        </a>
+      ))}
+    </nav>
+  </div>
+</header>

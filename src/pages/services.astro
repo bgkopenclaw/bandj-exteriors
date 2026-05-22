@@ -1,0 +1,124 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import CTABand from '../components/CTABand.astro';
+import { site } from '../data/site';
+
+const description =
+  'Power washing services in Bergen County, NJ — decks, patios, driveways, and pool surrounds. Owner-operated by Ben, Justin, and Brady. Free estimates.';
+---
+<BaseLayout
+  title="Work — B&J Exteriors"
+  description={description}
+  path="/services"
+>
+  <!-- PAGE HEAD -->
+  <section class="border-b border-hairline">
+    <div class="mx-auto max-w-[1440px] px-5 sm:px-8 lg:px-12 pt-20 md:pt-28 pb-16 md:pb-24">
+      <div class="grid grid-cols-12 gap-y-8 gap-x-6">
+        <div class="col-span-12 md:col-span-2">
+          <p class="label">Index / 02</p>
+        </div>
+        <div class="col-span-12 md:col-span-9 md:col-start-3" data-reveal>
+          <h1 class="d-01 max-w-[18ch]">One thing. Done well.</h1>
+          <p class="mt-8 text-bone-soft text-lg md:text-xl max-w-measure">
+            We don't do everything. We do hardscape — decks, patios, driveways, walkways, pool surrounds — and we do it well. The wrong pressure or the wrong chemistry damages surfaces, plants, or both, so we go slow and we go careful.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SERVICES — vertical narrative, alternating image side -->
+  {site.services.map((service, idx) => {
+    const num = String(idx + 1).padStart(2, '0');
+    const imageLeft = idx % 2 === 0;
+    // Verified Unsplash photo representing the SUBJECT of the service
+    // (a wooden deck). Swap to a real B&J photo when ready.
+    const heroImg = 'https://images.unsplash.com/photo-1574120583586-de8847ae992c?auto=format&fit=crop&w=1600&q=80';
+    return (
+      <section id={service.slug} class="border-b border-hairline">
+        <div class="grid grid-cols-12 gap-0 min-h-[70vh]">
+          <!-- Image -->
+          <div class:list={[
+            'col-span-12 md:col-span-6 relative bg-bg-up overflow-hidden aspect-[4/3] md:aspect-auto',
+            imageLeft ? 'md:order-1' : 'md:order-2 md:col-start-7',
+          ]}>
+            <!-- PLACEHOLDER — replace with a hero photo for {service.title} -->
+            <img src={heroImg} alt={`${service.title} — example work`} loading="lazy" class="w-full h-full object-cover" />
+            <p class="absolute bottom-5 left-5 label !text-bone bg-bg/65 px-2 py-1">N° {num} — {service.title}</p>
+          </div>
+
+          <!-- Type -->
+          <div class:list={[
+            'col-span-12 md:col-span-5 px-5 sm:px-8 lg:px-12 py-12 md:py-20',
+            imageLeft ? 'md:order-2 md:col-start-8' : 'md:order-1',
+          ]} data-reveal>
+            <p class="label mb-5">Service / {num}</p>
+            <h2 class="d-02">{service.title}</h2>
+            <p class="mt-6 text-bone-soft text-base md:text-lg max-w-measure">{service.description}</p>
+
+            <div class="mt-10">
+              <p class="label mb-4">Includes</p>
+              <ul class="space-y-0">
+                {service.includes.map((item, i) => (
+                  <li class="flex items-baseline gap-4 py-2.5 border-t border-hairline last:border-b">
+                    <span class="font-mono text-bone-mute text-xs">{String(i + 1).padStart(2, '0')}</span>
+                    <span class="text-bone">{item}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            <div class="mt-10 flex flex-col sm:flex-row gap-4 items-start sm:items-center">
+              <a href="/contact" class="btn">
+                Quote this work
+                <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <path d="M7 17 17 7M9 7h8v8"/>
+                </svg>
+              </a>
+              <a href={`tel:${site.contacts[0].tel}`} class="link-arrow text-base">
+                or call {site.contacts[0].name} — {site.contacts[0].phone}
+                <span class="arrow">↗</span>
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
+    );
+  })}
+
+  <!-- Pricing / process note (replaces generic "Why choose us") -->
+  <section class="border-b border-hairline">
+    <div class="mx-auto max-w-[1440px] px-5 sm:px-8 lg:px-12 py-20 md:py-28">
+      <div class="grid grid-cols-12 gap-x-6 gap-y-10">
+        <div class="col-span-12 md:col-span-4" data-reveal>
+          <p class="label mb-4">N° 04 — how it works</p>
+          <h2 class="d-02">Four steps. <span class="text-bone-mute">No surprises.</span></h2>
+        </div>
+        <div class="col-span-12 md:col-span-7 md:col-start-6" data-reveal style="--idx:1">
+          <ol class="border-t border-hairline">
+            {[
+              ['Call or quote-request', 'Reach Ben, Justin, or Brady. Tell us about the property — surface type, deck material, square footage, anything that matters.'],
+              ['On-site walkthrough', 'We come out, look at it, and write you a fixed quote. Free, no obligation.'],
+              ['Scheduled job', 'Most work scheduled within a week of approval. We confirm 24 hours before we arrive.'],
+              ['Walk-around at finish', "We don't leave until you've seen it and we've cleaned up after ourselves."],
+            ].map(([t, d], i) => (
+              <li class="grid grid-cols-12 gap-x-6 py-7 border-b border-hairline">
+                <span class="col-span-2 md:col-span-1 label">0{i + 1}</span>
+                <div class="col-span-10 md:col-span-11">
+                  <h3 class="text-bone text-xl mb-2">{t}</h3>
+                  <p class="text-bone-soft max-w-measure">{d}</p>
+                </div>
+              </li>
+            ))}
+          </ol>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <CTABand
+    heading="Tell us what's outside."
+    subheading="Send a photo or a sentence. We'll send back a fixed quote."
+  />
+</BaseLayout>
