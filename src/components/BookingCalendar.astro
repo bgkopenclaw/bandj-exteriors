@@ -12,34 +12,68 @@ const {
 } = Astro.props;
 ---
 <!--
-  Calendly inline embed.
-  URL pulled from src/data/site.ts (calendlyUrl) so it stays a one-edit change.
-  `is:inline` keeps Astro from bundling the third-party script.
+  Calendly POPUP trigger (not inline embed).
+
+  Why: when the parent page is served over HTTP (no SSL cert yet), Chrome blocks
+  Calendly's inline iframe because Calendly uses cookies for session continuity
+  and credentialed cross-origin iframes are refused inside insecure parents
+  ("calendly.com refused to connect"). A popup opens in its own top-level window
+  rather than an iframe, so the restriction doesn't apply.
+
+  Once bandjexteriors.com has HTTPS enabled, you can revert to the inline embed
+  by restoring the previous version of this file (`calendly-inline-widget` div +
+  widget.js). The popup also works fine over HTTPS, so leaving this in place is
+  also a valid choice.
+
+  Progressive enhancement: the anchor's href links directly to the Calendly
+  booking page. If JS is disabled or widget.js fails to load, the link still
+  opens the booking flow in a new tab.
 -->
+<link rel="stylesheet" href="https://assets.calendly.com/assets/external/widget.css" />
+<script src="https://assets.calendly.com/assets/external/widget.js" async is:inline></script>
+
 <section class="border-t border-hairline">
   <div class="mx-auto max-w-[1440px] px-5 sm:px-8 lg:px-12 py-16 md:py-24">
-    <div class="grid grid-cols-12 gap-y-8 gap-x-6 mb-10 md:mb-14">
+    <div class="grid grid-cols-12 gap-y-8 gap-x-6 items-end">
+
       <div class="col-span-12 md:col-span-5" data-reveal>
         <p class="label mb-4">N° 02 — direct booking</p>
         <h2 class="d-02">{heading}</h2>
       </div>
-      <div class="col-span-12 md:col-span-6 md:col-start-7 md:pt-6" data-reveal style="--idx:1">
-        <p class="text-bone-soft text-lg max-w-measure">{intro}</p>
+
+      <div class="col-span-12 md:col-span-6 md:col-start-7" data-reveal style="--idx:1">
+        <p class="text-bone-soft text-lg max-w-measure mb-8">{intro}</p>
+
+        <a
+          href={calendlyUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          data-calendly-popup
+          class="btn text-lg"
+        >
+          Open the calendar
+          <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M7 17 17 7M9 7h8v8"/>
+          </svg>
+        </a>
+
+        <p class="label mt-6">Confirmation lands on our Google Calendar automatically.</p>
       </div>
+
     </div>
-
-    <div
-      class="calendly-inline-widget bg-bone"
-      data-url={calendlyUrl}
-      style="min-width:320px;height:720px;transition-delay:120ms"
-      data-reveal
-    ></div>
-    <script
-      src="https://assets.calendly.com/assets/external/widget.js"
-      async
-      is:inline
-    ></script>
-
-    <p class="label mt-5">Confirmation lands on our Google Calendar automatically.</p>
   </div>
 </section>
+
+<script is:inline define:vars={{ calendlyUrl }}>
+  // Intercept clicks on any link tagged data-calendly-popup and open Calendly's
+  // popup instead. If widget.js hasn't loaded or fails, the browser falls back
+  // to the anchor's normal behavior (open the booking page in a new tab).
+  document.querySelectorAll('a[data-calendly-popup]').forEach((link) => {
+    link.addEventListener('click', (e) => {
+      if (window.Calendly && typeof window.Calendly.initPopupWidget === 'function') {
+        e.preventDefault();
+        window.Calendly.initPopupWidget({ url: calendlyUrl });
+      }
+    });
+  });
+</script>
