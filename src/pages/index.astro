@@ -1,4 +1,5 @@
 ---
+import { Picture } from 'astro:assets';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import BeforeAfter from '../components/BeforeAfter.astro';
 import CTABand from '../components/CTABand.astro';
@@ -12,6 +13,10 @@ import patioEmersonBefore   from '../assets/before-after/patio-emerson-before.pn
 import patioEmersonAfter    from '../assets/before-after/patio-emerson-after.png';
 import patioParkRidgeBefore from '../assets/before-after/patio-park-ridge-before.png';
 import patioParkRidgeAfter  from '../assets/before-after/patio-park-ridge-after.png';
+
+// Bergen County in-progress shots (replace prior Unsplash stock).
+import heroDeckWash from '../assets/home/hero-deck-wash.png';
+import midJobWand   from '../assets/home/midjob-wand.png';
 
 const description =
   'Power washing in Bergen County, NJ. Owner-operated by Ben, Justin & Brady — decks, patios, driveways, and pool surrounds. Quiet, careful, free estimates.';
@@ -72,8 +77,17 @@ const servicesNarrative = site.services.map((s, i) => ({
 
       <!-- Photo: full bleed left, 5 of 12 cols on md+, full-width on mobile -->
       <div class="col-span-12 md:col-span-5 relative bg-bg-up overflow-hidden order-2 md:order-1 aspect-[4/3] md:aspect-auto">
-        <!-- Verified Unsplash. Swap to a real action shot of B&J at work when one is available. Suggested: hot-water wand on concrete or a wood deck mid-spray, ~16:10, natural light. -->
-        <img src="https://images.unsplash.com/photo-1718152521364-b9655b8a7926?auto=format&fit=crop&w=2000&q=80" alt="Pressure washing in action on an outdoor surface" class="w-full h-full object-cover" loading="eager" />
+        <!-- GPT-Image-2 generated, Bergen County NJ context (Rivervale/Hillsdale aesthetic). Gloved hand on wand, no identifiable face. Swap to a real B&J on-the-job photo when one is available. -->
+        <Picture
+          src={heroDeckWash}
+          alt="Power-washer wand cleaning a weathered cedar deck at a suburban Bergen County, NJ home"
+          formats={['avif', 'webp']}
+          widths={[640, 1200, 1800]}
+          sizes="(min-width: 768px) 42vw, 100vw"
+          loading="eager"
+          decoding="async"
+          class="w-full h-full object-cover"
+        />
         <!-- subtle gradient to ground the type column edge -->
         <div class="absolute inset-y-0 right-0 w-24 bg-gradient-to-r from-transparent to-bg hidden md:block" aria-hidden="true"></div>
         <!-- metadata stamp -->
@@ -237,9 +251,18 @@ const servicesNarrative = site.services.map((s, i) => ({
       <div class="grid grid-cols-12 gap-x-6 gap-y-10">
         <!-- image -->
         <div class="col-span-12 md:col-span-5 relative aspect-[4/5] bg-bg-up overflow-hidden" data-reveal>
-          <!-- Verified Unsplash work-scene placeholder. Caption deliberately does NOT claim the people pictured are Ben, Justin, or Brady — swap to a real candid of the three (mid-job, not lined up) and update caption to "The team — Bergen Co." -->
-          <img src="https://images.unsplash.com/photo-1581883579507-019c44b711cb?auto=format&fit=crop&w=1200&q=80" alt="Pressure washer in use at close range" loading="lazy" class="w-full h-full object-cover" />
-          <p class="absolute bottom-4 left-4 label !text-bone bg-bg/65 px-2 py-1">Mid-job — Bergen Co.</p>
+          <!-- GPT-Image-2 generated, Bergen County NJ context. Gloved hand + wand close-up — no identifiable face. Swap to a real candid of Ben, Justin & Brady mid-job when available and update caption to "The team — Bergen Co." -->
+          <Picture
+            src={midJobWand}
+            alt="Power-washer wand mid-spray on a brick paver patio at a Bergen County, NJ home"
+            formats={['avif', 'webp']}
+            widths={[400, 640, 880]}
+            sizes="(min-width: 768px) 42vw, 100vw"
+            loading="lazy"
+            decoding="async"
+            class="w-full h-full object-cover"
+          />
+          <p class="absolute bottom-4 left-4 label !text-bone bg-bg/65 px-2 py-1 z-10">Mid-job — Bergen Co.</p>
         </div>
 
         <!-- type -->
