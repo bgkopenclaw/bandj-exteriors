@@ -15,8 +15,9 @@ import patioParkRidgeBefore from '../assets/before-after/patio-park-ridge-before
 import patioParkRidgeAfter  from '../assets/before-after/patio-park-ridge-after.png';
 
 // Bergen County in-progress shots (replace prior Unsplash stock).
-import heroDeckWash from '../assets/home/hero-deck-wash.png';
-import midJobWand   from '../assets/home/midjob-wand.png';
+import heroDeckWash     from '../assets/home/hero-deck-wash.png';
+import midJobWand       from '../assets/home/midjob-wand.png';
+import servicesOverview from '../assets/home/services-overview.png';
 
 const description =
   'Power washing in Bergen County, NJ. Owner-operated by Ben, Justin & Brady — decks, patios, driveways, and pool surrounds. Quiet, careful, free estimates.';
@@ -53,13 +54,13 @@ const jsonLd = {
   },
 };
 
-// Service narrative — alternating image side. Verified Unsplash photo
-// representing work-in-action; swap to a real on-the-job photo when available.
+// Service narrative — alternating image side. Image source is hard-coded in
+// the JSX below (single service for now); if we ever expand to multiple
+// services, give each entry an imported ImageMetadata field.
 const servicesNarrative = site.services.map((s, i) => ({
   ...s,
   number: String(i + 1).padStart(2, '0'),
   imageSide: i % 2 === 0 ? 'left' : 'right',
-  image: 'https://images.unsplash.com/photo-1607113364993-4f639eb54ebb?auto=format&fit=crop&w=1200&q=80',
 }));
 ---
 <BaseLayout
@@ -159,7 +160,7 @@ const servicesNarrative = site.services.map((s, i) => ({
         </div>
         <div class="col-span-12 md:col-span-6 md:col-start-7 md:pt-3" data-reveal style="--idx:1">
           <p class="text-bone-soft text-lg max-w-measure">
-            Three families of jobs covering most of what gets ugly outside. The right pressure, the right chemistry, the right person walking your property.
+            Decks, patios, driveways, walkways, pool surrounds. The right pressure, the right chemistry, the right person walking your property.
           </p>
         </div>
       </div>
@@ -172,9 +173,18 @@ const servicesNarrative = site.services.map((s, i) => ({
               'col-span-12 md:col-span-6 relative aspect-[5/4] bg-bg-up overflow-hidden',
               s.imageSide === 'right' ? 'md:order-2 md:col-start-7' : 'md:order-1',
             ]}>
-              <!-- PLACEHOLDER — replace with a hero photo for {s.title} -->
-              <img src={s.image} alt={`${s.title} — example work`} loading="lazy" class="w-full h-full object-cover" />
-              <p class="absolute bottom-4 left-4 label !text-bone bg-bg/65 px-2 py-1">N° {s.number}</p>
+              <!-- GPT-Image-2 generated, Bergen County NJ context (Rivervale/Hillsdale). Pressure washer + wand + cleaned-vs-dirty driveway contrast. Swap to a real on-the-job photo when one's available. -->
+              <Picture
+                src={servicesOverview}
+                alt={`${s.title} — work in progress on a Bergen County driveway`}
+                formats={['avif', 'webp']}
+                widths={[400, 800, 1200]}
+                sizes="(min-width: 768px) 45vw, 100vw"
+                loading="lazy"
+                decoding="async"
+                class="w-full h-full object-cover"
+              />
+              <p class="absolute bottom-4 left-4 label !text-bone bg-bg/65 px-2 py-1 z-10">N° {s.number}</p>
             </div>
 
             <!-- Type -->
