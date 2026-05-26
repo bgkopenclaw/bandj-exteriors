@@ -4,7 +4,9 @@
 brand
 
 ## Product purpose
-A marketing site for B and J Exteriors, an owner-operated power washing business in Bergen County, NJ. The site exists to convert local homeowners into phone calls and on-site estimates. Most visits come from mobile, often from a Google or word-of-mouth search after the visitor has decided they need someone but don't know who. The page has roughly one fold to feel "real" and one minute to surface a phone number.
+A marketing site for B and J Exteriors, a brand-new power washing business in Bergen County, NJ, owned and operated by three local high school students: Ben, Justin, and Brady. The site exists to convert local homeowners into phone calls and on-site estimates. Most visits come from mobile, often from a Google or word-of-mouth search after the visitor has decided they need someone but don't know who. The page has roughly one fold to feel "real" and one minute to surface a phone number.
+
+The team being high schoolers is part of the offer, not a disclaimer: the site should signal that these are local, serious, hardworking kids who care about doing each job the right way and being good members of their own community. The visual brand still reads grown-up and trade-confident — no kid-stylings — but copy doesn't pretend to be a decade-old business.
 
 ## Users
 **Bergen County homeowners** (35–70). Often dual-income, suburban single-family, judging contractors quickly. Want their decks, patios, driveways, and pool surrounds brought back without anyone wrecking the landscaping. Want to feel that the person showing up will respect their property and be reachable if there's a problem.

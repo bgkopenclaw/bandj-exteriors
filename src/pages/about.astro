@@ -1,10 +1,14 @@
 ---
+import { Picture } from 'astro:assets';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import CTABand from '../components/CTABand.astro';
 import { site } from '../data/site';
 
+// Bergen County in-progress shot (replaces prior Unsplash stock).
+import aboutHero from '../assets/home/about-hero.png';
+
 const description =
-  'Meet Ben, Justin, and Brady — the three owner-operators behind B&J Exteriors. A trusted, hands-on power washing business serving Bergen County, NJ.';
+  'Meet Ben, Justin, and Brady — three Bergen County high school students starting B&J Exteriors. Hands-on, community-focused power washing in Northern NJ.';
 ---
 <BaseLayout
   title="About — B&J Exteriors"
@@ -30,12 +34,21 @@ const description =
     </div>
   </section>
 
-  <!-- BIG ART-DIRECTED PORTRAIT (placeholder) -->
+  <!-- BIG ART-DIRECTED HERO -->
   <section class="border-b border-hairline">
     <div class="relative bg-bg-up aspect-[16/9] md:aspect-[16/8] overflow-hidden">
-      <!-- Verified Unsplash work-scene placeholder. Alt and caption deliberately do NOT claim the people pictured are Ben, Justin, or Brady — when a real candid wide shot of all three at a job site is available, swap src and restore the team-identifying alt/caption. -->
-      <img src="https://images.unsplash.com/photo-1718152470408-cfeebeb6b9fc?auto=format&fit=crop&w=2400&q=80" alt="Power washing crew at work in Bergen County" loading="eager" class="w-full h-full object-cover" />
-      <div class="absolute bottom-5 left-5 md:bottom-8 md:left-8">
+      <!-- GPT-Image-2 generated, Bergen County NJ context (Rivervale/Hillsdale aesthetic). Wand mid-spray on a paver walkway, gloved hand only, no identifiable face. Swap to a real candid of the team at a job site when one's available. -->
+      <Picture
+        src={aboutHero}
+        alt="Power-washing job in progress on a paver walkway at a Bergen County, NJ home"
+        formats={['avif', 'webp']}
+        widths={[800, 1400, 2000]}
+        sizes="100vw"
+        loading="eager"
+        decoding="async"
+        class="absolute inset-0 w-full h-full object-cover"
+      />
+      <div class="absolute bottom-5 left-5 md:bottom-8 md:left-8 z-10">
         <p class="label !text-bone-soft">Frame / 001 — at work</p>
       </div>
     </div>
@@ -52,13 +65,16 @@ const description =
         <div class="col-span-12 md:col-span-8 md:col-start-5" data-reveal style="--idx:1">
           <div class="space-y-7 text-bone-soft text-lg max-w-measure">
             <p>
-              We started B&amp;J the way most good small businesses start: friends, a pressure washer, and a stack of neighbors who needed help. The first season was driveways for people we grew up around.
+              B&amp;J Exteriors is brand new. We're three high school students from Bergen County — Ben, Justin, and Brady — born and raised in these towns, in class just down the road.
             </p>
             <p>
-              By year two we'd added the hot-water rig and a second truck. By year three we'd added Brady. We grew up around Bergen County and we've seen what happens when you hire the wrong contractor — torn-up decks, dead landscaping, no-shows, surprise charges. We started B&amp;J to do the opposite of all of that.
+              We started it because we wanted real work, and because we wanted to be useful to the neighborhood we grew up in. School comes first. The business comes right after. Both get our full effort.
+            </p>
+            <p>
+              We take this seriously. Every job gets done the right way: we learn the surface, we use the right pressure, we don't rush, and we don't leave until you've seen the work and you're happy with it.
             </p>
             <p class="text-bone text-xl md:text-2xl !leading-snug pt-4">
-              When you hire B&amp;J, you're hiring Ben, Justin, and Brady. Not a crew you've never met. Not a franchise. Three guys whose names are on the truck.
+              When you hire B&amp;J, you're hiring Ben, Justin, and Brady directly. No franchise. No crew you've never met. Three local kids who care about this town and their word.
             </p>
           </div>
         </div>
