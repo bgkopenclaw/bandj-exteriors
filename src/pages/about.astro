@@ -7,15 +7,15 @@ import { site } from '../data/site';
 // Bergen County in-progress shot (replaces prior Unsplash stock).
 import aboutHero from '../assets/home/about-hero.png';
 
-// Owner portraits. Add Justin & Brady the same way when their photos arrive.
-import benPortrait from '../assets/team/ben.png';
+// Owner portraits. Add Ben & Justin the same way when their photos arrive.
+import bradyPortrait from '../assets/team/brady.png';
 
-// Map contact name → portrait. Slugs we don't have yet stay null so the slot
-// renders the placeholder SVG with a clear comment.
-const portraits: Record<string, typeof benPortrait | null> = {
-  Ben: benPortrait,
+// Map contact name → portrait. Entries left null render the placeholder SVG
+// (and carry a marked comment for easy follow-up).
+const portraits: Record<string, typeof bradyPortrait | null> = {
+  Ben: null,
   Justin: null,
-  Brady: null,
+  Brady: bradyPortrait,
 };
 
 const description =
