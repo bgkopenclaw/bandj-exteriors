@@ -7,6 +7,17 @@ import { site } from '../data/site';
 // Bergen County in-progress shot (replaces prior Unsplash stock).
 import aboutHero from '../assets/home/about-hero.png';
 
+// Owner portraits. Add Justin & Brady the same way when their photos arrive.
+import benPortrait from '../assets/team/ben.png';
+
+// Map contact name → portrait. Slugs we don't have yet stay null so the slot
+// renders the placeholder SVG with a clear comment.
+const portraits: Record<string, typeof benPortrait | null> = {
+  Ben: benPortrait,
+  Justin: null,
+  Brady: null,
+};
+
 const description =
   'Meet Ben, Justin, and Brady — three Bergen County high school students starting B&J Exteriors. Hands-on, community-focused power washing in Northern NJ.';
 ---
@@ -98,20 +109,36 @@ const description =
       </div>
 
       <div class="grid grid-cols-1 md:grid-cols-3 gap-px bg-hairline">
-        {site.contacts.map((c, i) => (
-          <div class="bg-bg p-6 md:p-8 flex flex-col">
-            <div class="aspect-[4/5] bg-bg-up mb-6 overflow-hidden">
-              <!-- PLACEHOLDER — replace with a head-and-shoulders portrait of {c.name}, on a job site if possible -->
-              <img src="/images/hero-placeholder.svg" alt={`Portrait of ${c.name}, owner of B&J Exteriors`} loading="lazy" class="w-full h-full object-cover" />
+        {site.contacts.map((c, i) => {
+          const portrait = portraits[c.name];
+          return (
+            <div class="bg-bg p-6 md:p-8 flex flex-col">
+              <div class="aspect-[4/5] bg-bg-up mb-6 overflow-hidden">
+                {portrait ? (
+                  <Picture
+                    src={portrait}
+                    alt={`Portrait of ${c.name}, owner of B&J Exteriors`}
+                    formats={['avif', 'webp']}
+                    widths={[360, 540, 800]}
+                    sizes="(min-width: 768px) 30vw, 100vw"
+                    loading="lazy"
+                    decoding="async"
+                    class="w-full h-full object-cover"
+                  />
+                ) : (
+                  <!-- PLACEHOLDER — head-and-shoulders portrait, save to src/assets/team/{c.name.toLowerCase()}.png, then add to the `portraits` map at the top of this file. -->
+                  <img src="/images/hero-placeholder.svg" alt={`Portrait of ${c.name}, owner of B&J Exteriors`} loading="lazy" class="w-full h-full object-cover" />
+                )}
+              </div>
+              <p class="label mb-3">0{i + 1} — owner</p>
+              <h3 class="d-03">{c.name}</h3>
+              <a href={`tel:${c.tel}`} class="phone text-base mt-3 inline-block">
+                {c.phone}
+                <span class="ml-1">↗</span>
+              </a>
             </div>
-            <p class="label mb-3">0{i + 1} — owner</p>
-            <h3 class="d-03">{c.name}</h3>
-            <a href={`tel:${c.tel}`} class="phone text-base mt-3 inline-block">
-              {c.phone}
-              <span class="ml-1">↗</span>
-            </a>
-          </div>
-        ))}
+          );
+        })}
       </div>
     </div>
   </section>
